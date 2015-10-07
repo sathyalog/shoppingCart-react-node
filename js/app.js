@@ -16,6 +16,7 @@ var shoppingItems = require('./components/FluxCartApp.react');
 var FluxShoppingCart = require('./components/TemplateComp');
 var ViewCart = require('./components/FluxCart.react');
 var Logout = require('./components/TemplateComp').Logout;
+var baseURL = 'http://localhost:8081/api/users'
 // Load Mock Product Data into localStorage
 ProductData.init();
 
@@ -69,6 +70,70 @@ var Login = React.createClass({
   }
 })
 
+var Signup = React.createClass({
+  
+  userSubmit: function(user) {
+    var comments = this.state.data;
+    
+    $.ajax({
+      url: baseURL,
+      dataType: 'json',
+      type: 'POST',
+      data: user,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  
+  render: function() {
+    return (
+      <div>
+       
+        <RegistrationForm onUserSubmit={this.userSubmit} />
+      </div>
+    );
+  }
+
+})
+
+var RegistrationForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var email = React.findDOMNode(this.refs.emailid).value.trim();
+    var pwd = React.findDOMNode(this.refs.pwd).value.trim();
+    if (!pwd || !email) {
+      return;
+    }
+    this.props.onUserSubmit({email: email, pwd: pwd});
+    React.findDOMNode(this.refs.emailid).value = '';
+    React.findDOMNode(this.refs.pwd).value = '';
+  },
+  render: function() {
+    return (
+      <form className="registerForm form-inline" onSubmit={this.handleSubmit}>
+        <div className="form-group">
+        <label className="sr-only" for="InputEmail3">Email address</label>
+        <input ref="emailid" type="email" className="form-control" id="InputEmail3" placeholder="Email"/>
+        </div>
+        
+        <div className="form-group">
+          <label className="sr-only" for="InputPassword3">Password</label>
+          <input ref="pwd" type="password" className="form-control" id="InputPassword3" placeholder="Password"/>
+        </div>
+       
+        <button type="submit" value="Post" className="btn btn-default">Submit</button><br/><br/>
+        
+      </form>
+    );
+  }
+});
 var About = React.createClass({
   render() {
     return <h1>This is About Page</h1>
@@ -89,12 +154,13 @@ function requireAuth(nextState, replaceState) {
   if (!auth.loggedIn())
     replaceState({ nextPathname: nextState.location.pathname }, '/login')
 }
-	React.render((<Router history={history}>
+	React.render(<div><Router history={history}>
 			<Route path="/" component={FluxShoppingCart}>
 		      <Route path="showcart" component={ViewCart} />
 		      <Route path="about" component={About} />
 		      <Route path="home" component={shoppingItems} onEnter={requireAuth} />
 		      <Route path="login" component={Login} />
       		  <Route path="logout" component={Logout} />
+            <Route path="signup" component={Signup}  />
 		    </Route>			
-		</Router>),document.getElementById('container'));
+		</Router><Signup /></div>,document.getElementById('container'));

@@ -11,7 +11,7 @@ var HeaderComp = React.createClass({
                 
 				
                 <div className="login">
-                    <Link to="/login">Login</Link> | <a href="#">Signup</a>
+                    <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
                 </div>
 
 			</header>

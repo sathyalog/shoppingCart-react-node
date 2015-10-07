@@ -10,7 +10,6 @@ var Link = Router.Link;
 var auth = require('./../auth');
 var findDOMNode = require('react').findDOMNode;
 var History = require('react-router').History;
-
 var TemplateComp = React.createClass({
   getInitialState() {
     return {
