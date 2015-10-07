@@ -91,7 +91,9 @@ var Signup = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
-  
+  componentDidMount() {
+    auth.logout()
+  },
   render: function() {
     return (
       <div>
@@ -163,4 +165,4 @@ function requireAuth(nextState, replaceState) {
       		  <Route path="logout" component={Logout} />
             <Route path="signup" component={Signup}  />
 		    </Route>			
-		</Router><Signup /></div>,document.getElementById('container'));
+		</Router></div>,document.getElementById('container'));
