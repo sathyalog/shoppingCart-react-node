@@ -9,20 +9,30 @@ var ProductStore = require('../stores/ProductStore');
 var CartStore = require('../stores/CartStore');
 var CartAPI = require('../utils/CartAPI');
 var Link = Router.Link;
-
-
+var Search = require('react-search');
+var ITEMS = [];
 // Method to retrieve state from Stores
 function getCartState() {
+
   return {
     cartItems: CartStore.getCartItems(),
     products: CartAPI.getProductData().products,
-
+    totalItems: getItems(),
   };
 }
+function getItems(){
+    
+    for(var i=0;i<CartAPI.getProductData().products.length;i++){
+        ITEMS.push(CartAPI.getProductData().products[i].name);
+    }
+    
+}
+
 var ShoppingCartApp = React.createClass({
    
 	getInitialState: function(){
-		return getCartState();       
+          
+		return getCartState();
 	},
 
     
@@ -39,9 +49,10 @@ var ShoppingCartApp = React.createClass({
 
     // Render our child components, passing state via props
 	render: function(){
-       
+      
 		return (
 			<div id="page-main">
+                <SearchComponent items={ITEMS} />
 				<FluxProduct products={this.state.products} />
                 
 			</div>
@@ -54,4 +65,16 @@ var ShoppingCartApp = React.createClass({
     }
 });
 
+var SearchComponent = React.createClass({
+
+  myFunc:function(e) {
+    //console.log(e.target.value);
+  },
+
+  render: function() {
+    return (
+      <Search items={this.props.items} onChange={this.myFunc} />
+    );
+  }
+});
 module.exports = ShoppingCartApp;
