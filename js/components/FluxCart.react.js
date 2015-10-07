@@ -3,7 +3,6 @@ var FluxCartActions = require('../actions/FluxCartActions');
 var FluxProduct = require('./FluxProduct.react');
 var host="http://localhost:8080/"
 var Modal = require('react-bootstrap').Modal;
-var ModalExample = require('./showModal');
 // Flux cart view
 var FluxCart = React.createClass({
 

@@ -15,7 +15,7 @@ Concepts covered:
 
 Auth login:
 
-You cannot see home page without login. If you try to hit home page directly it will prompt you to login.
+You cannot see home page without login. If you try to hit home page directly it will prompt you to login. You can even login from your signup credentials as well.
 
 In order to work with signup form, i have created db.json file which acts like database that stores your data from your sign up form.
 

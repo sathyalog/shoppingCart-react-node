@@ -36,8 +36,21 @@ module.exports = {
 }
 
 function pretendRequest(email, pass, cb) {
+      var loginmails = [];
+      var loginpwd = [];
+   $.getJSON( "./../db.json", function( data ) {
+      
+      $.each( data, function( key, val ) {
+        loginmails.push(val.email);
+        loginpwd.push(val.pwd);
+        //console.log(val.email,val.pwd);
+        
+      });
+      
+    });
   setTimeout(() => {
-    if (email === 'sathya@sapient.com' && pass === 'password') {
+    if(loginmails.indexOf(email) && loginpwd.indexOf(pass)>=-1){
+    //if (email === 'sathya@sapient.com' && pass === 'password') {
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7)
