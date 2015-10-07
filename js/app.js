@@ -16,7 +16,7 @@ var shoppingItems = require('./components/FluxCartApp.react');
 var FluxShoppingCart = require('./components/TemplateComp');
 var ViewCart = require('./components/FluxCart.react');
 var Logout = require('./components/TemplateComp').Logout;
-
+// Load Mock Product Data into localStorage
 ProductData.init();
 
 var Login = React.createClass({
@@ -98,42 +98,3 @@ function requireAuth(nextState, replaceState) {
       		  <Route path="logout" component={Logout} />
 		    </Route>			
 		</Router>),document.getElementById('container'));
-
-// React.render(
-// 	<FluxShoppingCart />,
-// 	document.getElementById('container')<IndexRoute component={FluxShoppingCart}/>
-
-// );
-// var Test = React.createClass({
-
-//    render: function(){
-// 		return (
-// 				<div>
-// 					<h1> Routing implemented </h1>
-// 				</div>
-// 		);
-// 	},
-    
-    
-// })
-
-// var shoppingItems = React.createClass({
-
-//    render: function(){
-// 		return (
-// 				<div>
-// 					<h1> Shopping Bazaar </h1>
-// 				</div>
-// 		);
-// 	},
-    //<label><input ref="email" placeholder="email" defaultValue="sathya@sapient.com" /></label>
-       // <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />
-    
-// })
-// class About extends Component {
-//   render() {
-//     return <div>About</div>;
-//   }
-// }
-//Router.run(routes,function(Handler){
-//});

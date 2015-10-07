@@ -1,4 +1,6 @@
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 var HeaderComp = React.createClass({
 	render: function(){
 		return (
@@ -9,7 +11,7 @@ var HeaderComp = React.createClass({
                 
 				
                 <div className="login">
-                    <a href="#">Login</a> | <a href="#">Signup</a>
+                    <Link to="/login">Login</Link> | <a href="#">Signup</a>
                 </div>
 
 			</header>
