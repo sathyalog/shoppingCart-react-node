@@ -16,7 +16,7 @@ var TemplateComp = React.createClass({
       loggedIn: auth.loggedIn()
     }
   },
-
+  
   updateAuth(loggedIn) {
     this.setState({
       loggedIn: loggedIn

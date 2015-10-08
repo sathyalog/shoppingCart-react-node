@@ -130,7 +130,7 @@ var RegistrationForm = React.createClass({
           <input ref="pwd" type="password" className="form-control" id="InputPassword3" placeholder="Password"/>
         </div>
        
-        <button type="submit" value="Post" className="btn btn-default">Submit</button><br/><br/>
+        <button type="submit" value="Post" className="btn btn-default">Register</button><br/><br/>
         
       </form>
     );
@@ -157,7 +157,7 @@ function requireAuth(nextState, replaceState) {
     replaceState({ nextPathname: nextState.location.pathname }, '/login')
 }
 	React.render(<div><Router history={history}>
-			<Route path="/" component={FluxShoppingCart}>
+			<Route path="/" component={FluxShoppingCart} >
 		      <Route path="showcart" component={ViewCart} />
 		      <Route path="about" component={About} />
 		      <Route path="home" component={shoppingItems} onEnter={requireAuth} />
