@@ -1,17 +1,29 @@
 var React = require('react');
 var FluxCartActions = require('../actions/FluxCartActions');
 var FluxProduct = require('./FluxProduct.react');
-var host="http://localhost:8080/"
 var Modal = require('react-bootstrap').Modal;
+var CartStore = require('../stores/CartStore');
+var CartAPI = require('../utils/CartAPI');
+function getCartState() {
+
+  return {
+    cartItems: CartStore.getCartItems(),
+    products: CartAPI.getProductData().products,
+  };
+}
 // Flux cart view
 var FluxCart = React.createClass({
-
+    getInitialState: function(){
+          
+        return getCartState();
+    },
   // Render cart view
   render: function() {
+    console.log(this.state);
     return (
         <div className="basket">
             
-            <CartItemList products={this.props.products.items} cartItems={this.props.products.cartItems} />
+            <CartItemList products={this.state.products} cartItems={this.state.cartItems} />
         </div>
     );
   },
@@ -20,14 +32,14 @@ var FluxCart = React.createClass({
 
 var CartItemList = React.createClass({
 	render: function(){
-		var selectedProducts = this.props.products,
+		var selectedProducts = this.props.cartItems,
 		    cartItems = this.props.cartItems,
 		    productQty,
             totalCartItems = 0,
             itemsList;
         if (selectedProducts) {
             itemsList = selectedProducts.map(function(product, i){
-                productQty = cartItems[product.id]['count'];
+                productQty = cartItems.cartItems[product.id].count;
                 totalCartItems += productQty;
                 if (productQty > 0) {
                     return (
